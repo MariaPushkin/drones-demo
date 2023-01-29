@@ -1,0 +1,16 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/drones
+    username: srubeski
+    #password:
+  liquibase:
+    change-log: classpath:changelogs/changelog.yaml
+
+server:
+  servlet:
+    context-path: /api/v0.1

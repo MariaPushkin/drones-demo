@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id:  v0_0_2
+      author:  srubeski
+      changes:
+        - createTable:
+            tableName: drones
+            columns:
+              - column: { name: id, type: nvarchar(64), constraints: { nullable: false } }
+              - column: { name: serial_number, type: nvarchar(100), constraints: { nullable: false } }
+              - column: { name: model, type: nvarchar(64), constraints: { nullable: false } }
+              - column: { name: weight_limit, type: smallint, constraints: { nullable: false } }
+              - column: { name: battery_capacity, type: smallint, constraints: { nullable: false } }
+              - column: { name: state, type: nvarchar(64), constraints: { nullable: false } }
+
+        - addPrimaryKey:
+            constraintName: pk_drones
+            columnNames: id
+            tableName: drones
+
+
+        - createTable:
+            tableName: medications
+            columns:
+              - column: { name: id, type: nvarchar(64), constraints: { nullable: false } }
+              - column: { name: name, type: nvarchar(255), constraints: { nullable: false } }
+              - column: { name: weight, type: smallint, constraints: { nullable: false } }
+              - column: { name: code, type: nvarchar(255), constraints: { nullable: false } }
+              - column: { name: image, type: oid, constraints: { nullable: true } }
+              - column: { name: drone_id, type: nvarchar(64), constraints: { nullable: false } }
+
+        - addPrimaryKey:
+            constraintName: pk_medications
+            columnNames: id
+            tableName: medications
+
+        - addForeignKeyConstraint:
+            constraintName: fk_drones_medication
+            baseColumnNames: drone_id
+            baseTableName: medications
+            referencedColumnNames: id
+            referencedTableName: drones
