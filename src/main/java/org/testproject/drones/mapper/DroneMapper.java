@@ -3,6 +3,7 @@ package org.testproject.drones.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.testproject.drones.model.dto.request.NewDrone;
+import org.testproject.drones.model.dto.response.DroneBatteryLevel;
 import org.testproject.drones.model.dto.response.LoadedDrone;
 import org.testproject.drones.model.dto.response.RegisteredDrone;
 import org.testproject.drones.model.entity.DroneEntity;
@@ -20,4 +21,5 @@ public interface DroneMapper {
     RegisteredDrone toRegisteredDrone(DroneEntity drone);
     LoadedDrone toLoadedDrone(DroneEntity drone);
     List<RegisteredDrone> toRegisteredDroneList(List<DroneEntity> drones);
+    DroneBatteryLevel toDroneBatteryLevel(DroneEntity drone);
 }

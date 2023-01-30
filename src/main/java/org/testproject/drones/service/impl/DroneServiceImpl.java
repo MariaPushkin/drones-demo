@@ -9,6 +9,7 @@ import org.testproject.drones.mapper.DroneMapper;
 import org.testproject.drones.mapper.MedicationMapper;
 import org.testproject.drones.model.dto.request.NewDrone;
 import org.testproject.drones.model.dto.request.NewMedication;
+import org.testproject.drones.model.dto.response.DroneBatteryLevel;
 import org.testproject.drones.model.dto.response.LoadedDrone;
 import org.testproject.drones.model.dto.response.LoadedMedication;
 import org.testproject.drones.model.dto.response.RegisteredDrone;
@@ -51,6 +52,8 @@ public class DroneServiceImpl implements DroneService {
         drone.setMedications(currentMedications);
         if (drone.getRemainingWeightCapacity() == 0) {
             drone.setState(DroneState.LOADED);
+        } else {
+            drone.setState(DroneState.LOADING);
         }
         return droneMapper.toLoadedDrone(droneRepository.save(drone));
     }
@@ -63,15 +66,16 @@ public class DroneServiceImpl implements DroneService {
     }
 
     @Override
-    public Integer getBatteryLevel(String id) {
+    public DroneBatteryLevel getBatteryLevel(String id) {
         Optional<DroneEntity> optDrone = droneRepository.findById(id);
         DroneEntity drone = optDrone.orElseThrow(() -> new DroneNotFoundException(id));
-        return Integer.valueOf(drone.getBatteryCapacity());
+        return droneMapper.toDroneBatteryLevel(drone);
     }
 
     @Override
     public List<RegisteredDrone> getAvailableDrones() {
-        return null;
+        return droneMapper.toRegisteredDroneList(droneRepository.findAllByStateIn(
+                        List.of(DroneState.IDLE, DroneState.LOADING)));
     }
 
     private int getMedicationsWeight(List<NewMedication> medications) {
@@ -79,7 +83,4 @@ public class DroneServiceImpl implements DroneService {
                 .mapToInt(NewMedication::getWeight)
                 .sum();
     }
-
-
-
 }

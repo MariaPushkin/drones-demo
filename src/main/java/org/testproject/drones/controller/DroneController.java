@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.testproject.drones.model.dto.request.NewDrone;
 import org.testproject.drones.model.dto.request.NewMedication;
+import org.testproject.drones.model.dto.response.DroneBatteryLevel;
 import org.testproject.drones.model.dto.response.LoadedDrone;
 import org.testproject.drones.model.dto.response.LoadedMedication;
 import org.testproject.drones.model.dto.response.RegisteredDrone;
@@ -54,7 +55,7 @@ public class DroneController {
             path = "{id}/battery",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Integer> getBatteryLevel(@PathVariable String id) {
+    public ResponseEntity<DroneBatteryLevel> getBatteryLevel(@PathVariable String id) {
         return new ResponseEntity<>(droneService.getBatteryLevel(id), HttpStatus.OK);
     }
 

@@ -50,10 +50,8 @@ public class DroneEntity {
     }
 
     public int getRemainingWeightCapacity() {
-        short medicationsWeight = 0;
-        for (MedicationEntity medication : this.medications) {
-            medicationsWeight += medication.getWeight();
-        }
-        return this.weightLimit - medicationsWeight;
+        return this.weightLimit - this.medications.stream()
+                .mapToInt(MedicationEntity::getWeight)
+                .sum();
     }
 }
