@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id:  v0_0_2
+      id:  v0_0_1
       author:  srubeski
       changes:
         - createTable:
@@ -18,6 +18,10 @@ databaseChangeLog:
             columnNames: id
             tableName: drones
 
+        -  addUniqueConstraint:
+            constraintName: uni_serial_number
+            columnNames: serial_number
+            tableName: drones
 
         - createTable:
             tableName: medications
