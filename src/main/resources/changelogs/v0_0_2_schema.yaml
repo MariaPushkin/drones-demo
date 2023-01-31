@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id:  v0_0_2
+      author:  srubeski
+      changes:
+        - loadData:
+            file: preload/preloadedDrones.csv
+            primaryKey: id
+            tableName: drones
+
+        - loadData:
+            file: preload/preloadedMedications.csv
+            primaryKey: id
+            tableName: medications
