@@ -3,9 +3,7 @@ package org.testproject.drones.model.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.testproject.drones.model.enums.DroneModel;
 import org.testproject.drones.model.enums.DroneState;
@@ -13,6 +11,8 @@ import org.testproject.drones.model.enums.DroneState;
 import java.util.List;
 
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Setter
 @Getter
 @Entity

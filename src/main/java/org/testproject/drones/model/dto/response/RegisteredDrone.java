@@ -1,12 +1,12 @@
 package org.testproject.drones.model.dto.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.testproject.drones.model.enums.DroneModel;
 import org.testproject.drones.model.enums.DroneState;
 
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Setter
 @Getter
 public class RegisteredDrone {
